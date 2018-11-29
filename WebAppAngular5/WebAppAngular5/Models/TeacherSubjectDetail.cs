@@ -6,5 +6,7 @@ namespace WebAppAngular5.Models
 
         public Subject Subject { get; set; }
 
+        public ClassDetail ClassDetail { get; set; }
+
     }
 }

@@ -1,7 +1,10 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -16,7 +19,7 @@ namespace WebAppAngular5.Controllers
         // GET: api/TeacherSubjectDetails
         public IQueryable<TeacherSubjectDetail> GetTeacherSubjectDetails()
         {
-            return _repository.TeacherSubjectDetails;
+            return _repository.TeacherSubjectDetails.Include("ClassDetail").Include("Teacher").Include("Subject");
         }
 
         // GET: api/TeacherSubjectDetails/5
@@ -71,6 +74,12 @@ namespace WebAppAngular5.Controllers
         [ResponseType(typeof(TeacherSubjectDetail))]
         public async Task<IHttpActionResult> PostTeacherSubjectDetail(TeacherSubjectDetail teacherSubjectDetail)
         {
+            var identityClaims = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identityClaims.Claims;
+            var UserName = identityClaims.FindFirst("Username").Value;
+
+            teacherSubjectDetail.Created = DateTime.UtcNow;
+            teacherSubjectDetail.CreatedBy = _repository.Users.FirstOrDefault(x => x.UserName == UserName);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

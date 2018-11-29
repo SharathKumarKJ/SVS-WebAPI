@@ -16,7 +16,7 @@ namespace WebAppAngular5.Controllers
         // GET: api/FeeDetails
         public IQueryable<FeeDetail> GetFeeDetails()
         {
-            return _repository.FeeDetails;
+            return _repository.FeeDetails.Include("Student");
         }
 
         // GET: api/FeeDetails/5

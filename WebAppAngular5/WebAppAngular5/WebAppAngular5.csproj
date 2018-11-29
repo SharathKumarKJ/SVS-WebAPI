@@ -250,6 +250,14 @@
     <Compile Include="Migrations\201811270754061_DateTimeoffestChanges.Designer.cs">
       <DependentUpon>201811270754061_DateTimeoffestChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811291047087_classaddedtoteachersubject.cs" />
+    <Compile Include="Migrations\201811291047087_classaddedtoteachersubject.Designer.cs">
+      <DependentUpon>201811291047087_classaddedtoteachersubject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811291234396_PaidAmountAdded.cs" />
+    <Compile Include="Migrations\201811291234396_PaidAmountAdded.Designer.cs">
+      <DependentUpon>201811291234396_PaidAmountAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\BaseEntity.cs" />
@@ -360,6 +368,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811270754061_DateTimeoffestChanges.resx">
       <DependentUpon>201811270754061_DateTimeoffestChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811291047087_classaddedtoteachersubject.resx">
+      <DependentUpon>201811291047087_classaddedtoteachersubject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811291234396_PaidAmountAdded.resx">
+      <DependentUpon>201811291234396_PaidAmountAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
