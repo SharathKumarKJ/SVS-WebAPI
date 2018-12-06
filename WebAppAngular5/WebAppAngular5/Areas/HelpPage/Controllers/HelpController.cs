@@ -3,7 +3,6 @@ using System.Web.Http;
 using System.Web.Mvc;
 using WebAppAngular5.Areas.HelpPage.ModelDescriptions;
 using WebAppAngular5.Areas.HelpPage.Models;
-using WebAppAngular5.Base;
 
 namespace WebAppAngular5.Areas.HelpPage.Controllers
 {
@@ -22,10 +21,6 @@ namespace WebAppAngular5.Areas.HelpPage.Controllers
         public HelpController(HttpConfiguration config)
         {
             Configuration = config;
-        }
-        public HelpController(IRepository repository) : this(GlobalConfiguration.Configuration)
-        {
-
         }
 
         public HttpConfiguration Configuration { get; private set; }
