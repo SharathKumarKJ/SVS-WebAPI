@@ -27,7 +27,8 @@ namespace WebAppAngular5.Controllers
         [ResponseType(typeof(Student))]
         public async Task<IHttpActionResult> GetStudent(long id)
         {
-            Student student = await _repository.Students.FindAsync(id);
+            Student student = await _repository.Students.Include("ClassDetail").FirstOrDefaultAsync(x => x.Id == id);
+           
             if (student == null)
             {
                 return NotFound();
@@ -42,6 +43,10 @@ namespace WebAppAngular5.Controllers
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutStudent(long id, Student student)
         {
+            var userName = ((ClaimsIdentity)User.Identity).FindFirst("Username").Value;
+            student.Updated = DateTime.UtcNow;
+            student.UpdatedBy = _repository.Users.FirstOrDefault(x => x.UserName == userName);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -51,8 +56,9 @@ namespace WebAppAngular5.Controllers
             {
                 return BadRequest();
             }
-
             _repository.Entry(student).State = EntityState.Modified;
+         
+
 
             try
             {

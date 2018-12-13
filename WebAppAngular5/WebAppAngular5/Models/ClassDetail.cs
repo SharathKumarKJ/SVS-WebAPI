@@ -4,5 +4,7 @@ namespace WebAppAngular5.Models
     {
         public string ClassName { get; set; }
 
+        public bool IsActive { get; set; }
+
     }
 }

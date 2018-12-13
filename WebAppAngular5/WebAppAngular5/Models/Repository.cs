@@ -23,10 +23,10 @@ namespace WebAppAngular5.Models
 
         public DbSet<TeacherSubjectDetail> TeacherSubjectDetails { get; set; }
 
-  
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer<Repository>(null);
+
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>()
                 .ToTable("Users");

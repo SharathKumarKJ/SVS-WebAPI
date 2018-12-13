@@ -9,6 +9,7 @@ namespace WebAppAngular5.Models
         public string LastName { get; set; }
         public DateTimeOffset? Created { get; set; }
         public DateTimeOffset? Updated { get; set; }
+        public bool IsActive { get; set; }
 
     }
 }

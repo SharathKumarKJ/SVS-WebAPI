@@ -37,5 +37,7 @@ namespace WebAppAngular5.Models
         public string PostalCode { get; set; }
 
         public string Gender { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

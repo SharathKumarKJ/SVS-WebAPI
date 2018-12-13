@@ -261,3 +261,9 @@ C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debu
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.csproj.CopyComplete
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.dll
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.pdb
+C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.Migrations.IsActiveAdded.resources
+C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.Migrations.classDetailIDadded.resources
+C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\bin\Quartz.dll
+C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\bin\Quartz.pdb
+C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\bin\Quartz.xml
+C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.Migrations.FeeDetails_PaidDate.resources

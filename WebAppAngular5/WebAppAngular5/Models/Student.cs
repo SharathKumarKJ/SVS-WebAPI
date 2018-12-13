@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAppAngular5.Models
 {
@@ -7,6 +8,8 @@ namespace WebAppAngular5.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        [ForeignKey("ClassDetail")]
+        public long ClassDetailId { get; set; }
         public ClassDetail ClassDetail { get; set; }
 
         public string STSCode { get; set; }
@@ -35,5 +38,13 @@ namespace WebAppAngular5.Models
         public string PostalCode { get; set; }
 
         public DateTime DateofBirth { get; set; }
+
+
+        public bool IsActive { get; set; }
+
+
+
+
+     
     }
 }
