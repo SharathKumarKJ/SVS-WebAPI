@@ -23,6 +23,20 @@ namespace WebAppAngular5.Controllers
          
         }
 
+        // GET: api/StudentsByClass/5
+
+        [Route("api/StudentsByClass/{classId}")]
+        public IQueryable<Student> GetStudents(long classId)
+        {
+            var students = classId != default(long)
+                ? _repository.Students.Include("ClassDetail").Where(x => x.ClassDetailId == classId)
+                : _repository.Students.Include("ClassDetail");
+
+            return students;
+
+
+        }
+
         // GET: api/Students/5
         [ResponseType(typeof(Student))]
         public async Task<IHttpActionResult> GetStudent(long id)
@@ -46,6 +60,7 @@ namespace WebAppAngular5.Controllers
             var userName = ((ClaimsIdentity)User.Identity).FindFirst("Username").Value;
             student.Updated = DateTime.UtcNow;
             student.UpdatedBy = _repository.Users.FirstOrDefault(x => x.UserName == userName);
+            student.ClassDetailId = student.ClassDetail?.Id ?? default(long);
 
             if (!ModelState.IsValid)
             {

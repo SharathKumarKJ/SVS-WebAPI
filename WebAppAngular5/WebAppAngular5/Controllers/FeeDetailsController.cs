@@ -19,6 +19,19 @@ namespace WebAppAngular5.Controllers
             return _repository.FeeDetails.Include("Student");
         }
 
+        [Route("api/FeesByClass/{classId}")]
+        public IQueryable<FeeDetail> GetFeeDetailsByClass(long classId)
+        {
+            var fees = classId != default(long)
+                ? _repository.FeeDetails.Include("Student").Where(x => x.Student.ClassDetailId == classId)
+                : _repository.FeeDetails.Include("Student");
+
+            return fees;
+
+
+        }
+
+
         // GET: api/FeeDetails/5
         [ResponseType(typeof(FeeDetail))]
         public async Task<IHttpActionResult> GetFeeDetail(long id)

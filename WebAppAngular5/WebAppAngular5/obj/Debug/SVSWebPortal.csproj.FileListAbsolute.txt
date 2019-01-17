@@ -139,3 +139,4 @@ C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debu
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\SVSWebPortal.csproj.CopyComplete
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.dll
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.pdb
+C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\SVSWebPortal.csprojAssemblyReference.cache
