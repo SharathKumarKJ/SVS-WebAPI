@@ -27,10 +27,7 @@ namespace WebAppAngular5.Controllers
                 : _repository.FeeDetails.Include("Student");
 
             return fees;
-
-
         }
-
 
         // GET: api/FeeDetails/5
         [ResponseType(typeof(FeeDetail))]
