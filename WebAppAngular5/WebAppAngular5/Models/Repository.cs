@@ -22,6 +22,8 @@ namespace WebAppAngular5.Models
         public DbSet<FeeDetail> FeeDetails { get; set; }
 
         public DbSet<TeacherSubjectDetail> TeacherSubjectDetails { get; set; }
+        public DbSet<StudentAttendance> StudentAttendances { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

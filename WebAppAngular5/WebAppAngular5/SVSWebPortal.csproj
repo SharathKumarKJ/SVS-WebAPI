@@ -235,6 +235,7 @@
     <Compile Include="Controllers\ClassDetailsController.cs" />
     <Compile Include="Controllers\FeeDetailsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentAttendancesController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\SubjectsController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
@@ -271,6 +272,22 @@
     <Compile Include="Migrations\201812131026550_FeeDetails_PaidDate.Designer.cs">
       <DependentUpon>201812131026550_FeeDetails_PaidDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901241113441_StudentAttendance.cs" />
+    <Compile Include="Migrations\201901241113441_StudentAttendance.Designer.cs">
+      <DependentUpon>201901241113441_StudentAttendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901241307436_StudentAttendance1.cs" />
+    <Compile Include="Migrations\201901241307436_StudentAttendance1.Designer.cs">
+      <DependentUpon>201901241307436_StudentAttendance1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901241312476_StudentAttendance2.cs" />
+    <Compile Include="Migrations\201901241312476_StudentAttendance2.Designer.cs">
+      <DependentUpon>201901241312476_StudentAttendance2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901241325170_StudentAttendance3.cs" />
+    <Compile Include="Migrations\201901241325170_StudentAttendance3.Designer.cs">
+      <DependentUpon>201901241325170_StudentAttendance3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\BaseEntity.cs" />
@@ -278,6 +295,7 @@
     <Compile Include="Models\FeeDetail.cs" />
     <Compile Include="Models\Repository.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentAttendance.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Models\TeacherSubjectDetail.cs" />
@@ -414,6 +432,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812131026550_FeeDetails_PaidDate.resx">
       <DependentUpon>201812131026550_FeeDetails_PaidDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901241113441_StudentAttendance.resx">
+      <DependentUpon>201901241113441_StudentAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901241307436_StudentAttendance1.resx">
+      <DependentUpon>201901241307436_StudentAttendance1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901241312476_StudentAttendance2.resx">
+      <DependentUpon>201901241312476_StudentAttendance2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901241325170_StudentAttendance3.resx">
+      <DependentUpon>201901241325170_StudentAttendance3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -140,3 +140,7 @@ C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debu
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.dll
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.pdb
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\SVSWebPortal.csprojAssemblyReference.cache
+C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.Migrations.StudentAttendance.resources
+C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.Migrations.StudentAttendance1.resources
+C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.Migrations.StudentAttendance2.resources
+C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.Migrations.StudentAttendance3.resources
