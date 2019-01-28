@@ -20,14 +20,14 @@ namespace WebAppAngular5.Controllers
         // GET: api/Subjects
         public IQueryable<Subject> GetSubjects()
         {
-            return _repository.Subjects;
+            return _repository.Subjects.Where(x=>x.IsActive);
         }
 
         // GET: api/Subjects/5
         [ResponseType(typeof(Subject))]
         public async Task<IHttpActionResult> GetSubject(long id)
         {
-            Subject subject = await _repository.Subjects.FindAsync(id);
+            Subject subject = await _repository.Subjects.FirstOrDefaultAsync(x=>x.Id == id && x.IsActive);
             if (subject == null)
             {
                 return NotFound();
@@ -80,7 +80,7 @@ namespace WebAppAngular5.Controllers
             var UserName = identityClaims.FindFirst("Username").Value;
 
             subject.Created = DateTime.UtcNow;
-            subject.CreatedBy = _repository.Users.FirstOrDefault(x => x.UserName == UserName);
+            subject.CreatedBy = _repository.Users.FirstOrDefault(x => x.UserName == UserName && x.IsActive);
 
             if (!ModelState.IsValid)
             {

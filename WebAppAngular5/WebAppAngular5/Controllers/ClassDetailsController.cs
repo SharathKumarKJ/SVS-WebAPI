@@ -21,14 +21,14 @@ namespace WebAppAngular5.Controllers
 
         public IQueryable<ClassDetail> GetClassDetails()
         {
-            return _repository.ClassDetails;
+            return _repository.ClassDetails.Where(x=>x.IsActive);
         }
 
         // GET: api/ClassDetails/5
         [ResponseType(typeof(ClassDetail))]
         public async Task<IHttpActionResult> GetClassDetail(long id)
         {
-            ClassDetail classDetail = await _repository.ClassDetails.FindAsync(id);
+            ClassDetail classDetail = await _repository.ClassDetails.FirstOrDefaultAsync(x => x.IsActive && x.Id == id);
             if (classDetail == null)
             {
                 return NotFound();
@@ -81,7 +81,7 @@ namespace WebAppAngular5.Controllers
             var UserName = identityClaims.FindFirst("Username").Value;
 
             classDetail.Created = DateTime.UtcNow;
-            classDetail.CreatedBy = _repository.Users.FirstOrDefault(x => x.UserName == UserName);
+            classDetail.CreatedBy = _repository.Users.FirstOrDefault(x => x.IsActive && x.UserName == UserName);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

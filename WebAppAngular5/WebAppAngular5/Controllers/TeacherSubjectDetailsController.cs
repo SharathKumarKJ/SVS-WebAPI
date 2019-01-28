@@ -19,14 +19,18 @@ namespace WebAppAngular5.Controllers
         // GET: api/TeacherSubjectDetails
         public IQueryable<TeacherSubjectDetail> GetTeacherSubjectDetails()
         {
-            return _repository.TeacherSubjectDetails.Include("ClassDetail").Include("Teacher").Include("Subject");
+            return _repository.TeacherSubjectDetails
+                .Include("ClassDetail")
+                .Include("Teacher")
+                .Include("Subject")
+                .Where(x => x.IsActive);
         }
 
         // GET: api/TeacherSubjectDetails/5
         [ResponseType(typeof(TeacherSubjectDetail))]
         public async Task<IHttpActionResult> GetTeacherSubjectDetail(long id)
         {
-            TeacherSubjectDetail teacherSubjectDetail = await _repository.TeacherSubjectDetails.FindAsync(id);
+            TeacherSubjectDetail teacherSubjectDetail = await _repository.TeacherSubjectDetails.FirstOrDefaultAsync(x=>x.Id == id && x.IsActive);
             if (teacherSubjectDetail == null)
             {
                 return NotFound();
@@ -79,7 +83,7 @@ namespace WebAppAngular5.Controllers
             var UserName = identityClaims.FindFirst("Username").Value;
 
             teacherSubjectDetail.Created = DateTime.UtcNow;
-            teacherSubjectDetail.CreatedBy = _repository.Users.FirstOrDefault(x => x.UserName == UserName);
+            teacherSubjectDetail.CreatedBy = _repository.Users.FirstOrDefault(x => x.UserName == UserName && x.IsActive);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

@@ -16,15 +16,15 @@ namespace WebAppAngular5.Controllers
         // GET: api/FeeDetails
         public IQueryable<FeeDetail> GetFeeDetails()
         {
-            return _repository.FeeDetails.Include("Student");
+            return _repository.FeeDetails.Include("Student").Where(x => x.IsActive);
         }
 
         [Route("api/FeesByClass/{classId}")]
         public IQueryable<FeeDetail> GetFeeDetailsByClass(long classId)
         {
             var fees = classId != default(long)
-                ? _repository.FeeDetails.Include("Student").Where(x => x.Student.ClassDetailId == classId)
-                : _repository.FeeDetails.Include("Student");
+                ? _repository.FeeDetails.Include("Student").Where(x =>x.IsActive && x.Student.ClassDetailId == classId)
+                : _repository.FeeDetails.Include("Student").Where(x=>x.IsActive);
 
             return fees;
         }
@@ -33,7 +33,7 @@ namespace WebAppAngular5.Controllers
         [ResponseType(typeof(FeeDetail))]
         public async Task<IHttpActionResult> GetFeeDetail(long id)
         {
-            FeeDetail feeDetail = await _repository.FeeDetails.FindAsync(id);
+            FeeDetail feeDetail = await _repository.FeeDetails.FirstOrDefaultAsync(x => x.Id == id && x.IsActive);
             if (feeDetail == null)
             {
                 return NotFound();

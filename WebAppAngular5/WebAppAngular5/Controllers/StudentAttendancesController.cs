@@ -21,14 +21,14 @@ namespace WebAppAngular5.Controllers
         // GET: api/StudentAttendances
         public IQueryable<StudentAttendance> GetStudentAttendances()
         {
-            return _repository.StudentAttendances;
+            return _repository.StudentAttendances.Where(x=>x.IsActive);
         }
 
         // GET: api/StudentAttendances/5
         [ResponseType(typeof(StudentAttendance))]
         public async Task<IHttpActionResult> GetStudentAttendance(long id)
         {
-            StudentAttendance studentAttendance = await _repository.StudentAttendances.FindAsync(id);
+            StudentAttendance studentAttendance = await _repository.StudentAttendances.FirstOrDefaultAsync(x=>x.Id==id && x.IsActive);
             if (studentAttendance == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace WebAppAngular5.Controllers
 
             var userName = ((ClaimsIdentity)User.Identity).FindFirst("Username").Value;
 
-            var createdBy = _repository.Users.FirstOrDefault(x => x.UserName == userName);
+            var createdBy = _repository.Users.FirstOrDefault(x => x.UserName == userName && x.IsActive);
 
             foreach (var studentId in studentAttendanceInfo.StudentIds.Split(','))
             {
@@ -96,14 +96,16 @@ namespace WebAppAngular5.Controllers
                 }
             }
 
-            var existingStudentAttendance = _repository.StudentAttendances.Where(x => x.IsActive && x.AttendanceDate == systemDate);
+            var existingStudentAttendance = _repository
+                .StudentAttendances.Where(x => x.IsActive && x.AttendanceDate == systemDate);
 
-            var existingStudentAttendanceToBeInactive = existingStudentAttendance.Where(x => !studentAarrayIds.Contains(x.StudentId));
+            var toBeDeleted = existingStudentAttendance
+                .Where(x => !studentAarrayIds.Contains(x.StudentId));
 
 
-            if (existingStudentAttendanceToBeInactive.Any())
+            if (toBeDeleted.Any())
             {
-                foreach (var student in existingStudentAttendanceToBeInactive)
+                foreach (var student in toBeDeleted)
                 {
                   
                     student.IsActive = false;

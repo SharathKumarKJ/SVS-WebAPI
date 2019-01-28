@@ -19,7 +19,7 @@ namespace WebAppAngular5.Controllers
         // GET: api/Students
         public IQueryable<Student> GetStudents()
         {
-            return _repository.Students.Include("ClassDetail");
+            return _repository.Students.Include("ClassDetail").Where(x=>x.IsActive);
          
         }
 
@@ -29,8 +29,8 @@ namespace WebAppAngular5.Controllers
         public IQueryable<Student> GetStudents(long classId)
         {
             var students = classId != default(long)
-                ? _repository.Students.Include("ClassDetail").Where(x => x.ClassDetailId == classId)
-                : _repository.Students.Include("ClassDetail");
+                ? _repository.Students.Include("ClassDetail").Where(x => x.ClassDetailId == classId && x.IsActive)
+                : _repository.Students.Include("ClassDetail").Where(x=>x.IsActive);
 
             return students;
 
@@ -41,7 +41,7 @@ namespace WebAppAngular5.Controllers
         [ResponseType(typeof(Student))]
         public async Task<IHttpActionResult> GetStudent(long id)
         {
-            Student student = await _repository.Students.Include("ClassDetail").FirstOrDefaultAsync(x => x.Id == id);
+            Student student = await _repository.Students.Include("ClassDetail").FirstOrDefaultAsync(x => x.Id == id && x.IsActive);
            
             if (student == null)
             {
@@ -59,7 +59,7 @@ namespace WebAppAngular5.Controllers
         {
             var userName = ((ClaimsIdentity)User.Identity).FindFirst("Username").Value;
             student.Updated = DateTime.UtcNow;
-            student.UpdatedBy = _repository.Users.FirstOrDefault(x => x.UserName == userName);
+            student.UpdatedBy = _repository.Users.FirstOrDefault(x => x.UserName == userName && x.IsActive);
             student.ClassDetailId = student.ClassDetail?.Id ?? default(long);
 
             if (!ModelState.IsValid)

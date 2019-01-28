@@ -19,14 +19,14 @@ namespace WebAppAngular5.Controllers
         // GET: api/Teachers
         public IQueryable<Teacher> GetTeachers()
         {
-            return _repository.Teachers;
+            return _repository.Teachers.Where(x=>x.IsActive);
         }
 
         // GET: api/Teachers/5
         [ResponseType(typeof(Teacher))]
         public async Task<IHttpActionResult> GetTeacher(long id)
         {
-            Teacher teacher = await _repository.Teachers.FindAsync(id);
+            Teacher teacher = await _repository.Teachers.FirstOrDefaultAsync(x=>x.Id == id && x.IsActive);
             if (teacher == null)
             {
                 return NotFound();
@@ -76,7 +76,7 @@ namespace WebAppAngular5.Controllers
         {
             var userName = ((ClaimsIdentity)User.Identity).FindFirst("Username").Value;
             teacher.Created = DateTime.UtcNow;
-            teacher.CreatedBy = _repository.Users.FirstOrDefault(x => x.UserName == userName);
+            teacher.CreatedBy = _repository.Users.FirstOrDefault(x => x.UserName == userName && x.IsActive);
 
             if (!ModelState.IsValid)
             {
