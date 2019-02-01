@@ -18,6 +18,7 @@ namespace WebAppAngular5.Controllers
     {
         private Repository _repository = new Repository();
 
+        #region Public Methods
         // GET: api/StudentAttendances
         public IEnumerable<StudentAttendance> GetStudentAttendances()
         {
@@ -217,6 +218,9 @@ namespace WebAppAngular5.Controllers
             base.Dispose(disposing);
         }
 
+        #endregion
+
+        #region Private Methods 
         private bool StudentAttendanceExists(long id)
         {
             return _repository.StudentAttendances.Count(e => e.Id == id) > 0;
@@ -273,8 +277,11 @@ namespace WebAppAngular5.Controllers
                 }
             }
         }
+
+        #endregion
     }
 
+    #region Local Classes 
     public class StudentAttendanceInfo
     {
         public long ClassId { get; set; }
@@ -291,4 +298,5 @@ namespace WebAppAngular5.Controllers
         public DateTime? AttendanceDate { get; set; }
 
     }
+    #endregion
 }

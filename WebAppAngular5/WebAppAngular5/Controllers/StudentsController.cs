@@ -51,8 +51,6 @@ namespace WebAppAngular5.Controllers
             return Ok(student);
         }
 
-
-
         // PUT: api/Students/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutStudent(long id, Student student)

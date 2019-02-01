@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
-using System.Web.Mvc;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using WebAppAngular5.Controllers;
 
 [assembly: OwinStartup(typeof(WebAppAngular5.Startup))]
 
