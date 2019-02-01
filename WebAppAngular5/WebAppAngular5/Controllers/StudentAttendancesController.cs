@@ -19,22 +19,72 @@ namespace WebAppAngular5.Controllers
         private Repository _repository = new Repository();
 
         // GET: api/StudentAttendances
-        public IQueryable<StudentAttendance> GetStudentAttendances()
+        public IEnumerable<StudentAttendance> GetStudentAttendances()
         {
-            return _repository.StudentAttendances.Where(x=>x.IsActive);
+            var result = _repository.StudentAttendances
+                .Include(x => x.Student)
+                .Where(x => x.IsActive).ToList();
+
+            return result;
         }
 
         // GET: api/StudentAttendances/5
         [ResponseType(typeof(StudentAttendance))]
         public async Task<IHttpActionResult> GetStudentAttendance(long id)
         {
-            StudentAttendance studentAttendance = await _repository.StudentAttendances.FirstOrDefaultAsync(x=>x.Id==id && x.IsActive);
+            StudentAttendance studentAttendance = await _repository.StudentAttendances.FirstOrDefaultAsync(x => x.Id == id && x.IsActive);
             if (studentAttendance == null)
             {
                 return NotFound();
             }
 
             return Ok(studentAttendance);
+        }
+
+        [HttpPost]
+        [Route("api/GetAttendanceByParam")]
+        public IEnumerable<StudentAttendance> GetAttendanceByParams([FromBody] AttendanceParam attendanceParam)
+        {
+            if (attendanceParam == null)
+            {
+                var currentSystemDate = DateTime.Now;
+
+                return _repository.StudentAttendances
+                    .Where(x => x.IsActive && x.AttendanceDate == currentSystemDate).ToList();
+            }
+
+            return _repository.StudentAttendances
+                 .Include(x => x.Student)
+                 .Include(x => x.Student.ClassDetail)
+                 .Where(x => x.IsActive
+                 && (attendanceParam.AttendanceDate == null || x.AttendanceDate == attendanceParam.AttendanceDate)
+                 && (attendanceParam.Name == null || x.Student.FirstName.Contains(attendanceParam.Name))
+                 && (attendanceParam.ClassName == null || x.Student.ClassDetail.ClassName.Contains(attendanceParam.ClassName))).ToList();
+
+        }
+        // GET: api/GetAttendanceByDate
+
+        [Route("api/GetAttendanceByDate/{date}")]
+        public IQueryable<StudentAttendance> GetAttendanceByDate(string date)
+        {
+            if (DateTime.TryParse(date, out DateTime dateTime))
+            {
+                return _repository.StudentAttendances.Include("Student")
+                    .Where(x => x.IsActive && x.AttendanceDate == dateTime);
+            }
+            return _repository.StudentAttendances.Include("Student").Where(x => x.IsActive);
+        }
+
+        // GET: api/StudentsByClass/5
+
+        [Route("api/GetAttendanceByClass/{classId}")]
+        public IQueryable<StudentAttendance> GetAttendanceByClass(long classId)
+        {
+            var studentAttendances = classId != default(long)
+                ? _repository.StudentAttendances.Include(x => x.Student).Where(x => x.IsActive && x.Student.ClassDetailId == classId)
+                : _repository.StudentAttendances.Include(x => x.Student).Where(x => x.IsActive);
+
+            return studentAttendances;
         }
 
         // PUT: api/StudentAttendances/5
@@ -88,77 +138,44 @@ namespace WebAppAngular5.Controllers
 
             var createdBy = _repository.Users.FirstOrDefault(x => x.UserName == userName && x.IsActive);
 
-            foreach (var studentId in studentAttendanceInfo.StudentIds.Split(','))
-            {
-                if (long.TryParse(studentId, out long result))
-                {
-                    studentAarrayIds.Add(result);
-                }
-            }
+            ParseStudent(studentAttendanceInfo, studentAarrayIds);
 
             var existingStudentAttendance = _repository
-                .StudentAttendances.Where(x => x.IsActive && x.AttendanceDate == systemDate);
-
-            var toBeDeleted = existingStudentAttendance
-                .Where(x => !studentAarrayIds.Contains(x.StudentId));
-
-
-            if (toBeDeleted.Any())
-            {
-                foreach (var student in toBeDeleted)
-                {
-                  
-                    student.IsActive = false;
-                    student.Updated = DateTime.UtcNow;
-                    student.UpdatedBy = createdBy;
-                    _repository.Entry(student).State = EntityState.Modified;
-
-                }
-
-                try
-                {
-                    await _repository.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    throw;
-                }
-            }
-
-            var students = _repository.Students.Where(x => studentAarrayIds.Contains(x.Id)
-            && x.ClassDetailId == studentAttendanceInfo.ClassId
-            && x.IsActive).ToList();
+                .StudentAttendances.Where(x => x.IsActive && x.AttendanceDate == systemDate && x.IsPresent).ToList();
 
             if (existingStudentAttendance.Any())
             {
-                IQueryable<long> existingIds = existingStudentAttendance.Select(y => y.StudentId);
+                var absentStudents = existingStudentAttendance
+                    .Where(x => !studentAarrayIds.Contains(x.StudentId));
+
+                await UpdateAbsentStudents(createdBy, absentStudents);
+            }
+
+            var students = _repository.Students.Where(x => x.ClassDetailId == studentAttendanceInfo.ClassId
+            && x.IsActive).ToList();
+
+            var studentsArePresent = students.Where(x => studentAarrayIds.Contains(x.Id));
+
+            var studentsAreAbsent = students.Except(studentsArePresent);
+
+            if (existingStudentAttendance.Any())
+            {
+                var existingIds = existingStudentAttendance.Select(y => y.StudentId);
                 students = students.Where(x => !existingIds.Contains(x.Id)).ToList();
             }
 
             var studentAttendances = new List<StudentAttendance>();
 
-            foreach (var student in students)
-            {
+            InsertStudentAttendance(systemDate, createdBy, studentsArePresent, studentAttendances, isPresent: true);
 
-                var entity = new StudentAttendance
-                {
-                    Student = student,
-                    AttendanceDate = systemDate,
-                    IsActive = true,
-                    IsPresent = true,
-                    Created = DateTime.UtcNow,
-                    CreatedBy = createdBy
-
-                };
-
-                studentAttendances.Add(entity);
-            }
+            InsertStudentAttendance(systemDate, createdBy, studentsAreAbsent, studentAttendances, isPresent: false);
 
             _repository.StudentAttendances.AddRange(studentAttendances);
+
             await _repository.SaveChangesAsync();
+
             return StatusCode(HttpStatusCode.NoContent);
         }
-
 
         // POST: api/StudentAttendances
         [ResponseType(typeof(StudentAttendance))]
@@ -204,6 +221,58 @@ namespace WebAppAngular5.Controllers
         {
             return _repository.StudentAttendances.Count(e => e.Id == id) > 0;
         }
+        private static void InsertStudentAttendance(DateTime systemDate, User createdBy, IEnumerable<Student> students, List<StudentAttendance> studentAttendances, bool isPresent)
+        {
+            foreach (var student in students)
+            {
+                var entity = new StudentAttendance
+                {
+                    Student = student,
+                    AttendanceDate = systemDate,
+                    IsActive = true,
+                    IsPresent = isPresent,
+                    Created = DateTime.UtcNow,
+                    CreatedBy = createdBy
+
+                };
+
+                studentAttendances.Add(entity);
+            }
+        }
+        private async Task UpdateAbsentStudents(User createdBy, IEnumerable<StudentAttendance> toBeAbsent)
+        {
+            if (toBeAbsent.Any())
+            {
+                foreach (var student in toBeAbsent)
+                {
+
+                    student.IsActive = true;
+                    student.IsPresent = false;
+                    student.Updated = DateTime.UtcNow;
+                    student.UpdatedBy = createdBy;
+                    _repository.Entry(student).State = EntityState.Modified;
+                }
+
+                try
+                {
+                    await _repository.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+            }
+        }
+        private static void ParseStudent(StudentAttendanceInfo studentAttendanceInfo, List<long> studentAarrayIds)
+        {
+            foreach (var studentId in studentAttendanceInfo.StudentIds.Split(','))
+            {
+                if (long.TryParse(studentId, out long result))
+                {
+                    studentAarrayIds.Add(result);
+                }
+            }
+        }
     }
 
     public class StudentAttendanceInfo
@@ -211,5 +280,15 @@ namespace WebAppAngular5.Controllers
         public long ClassId { get; set; }
 
         public string StudentIds { get; set; }
+    }
+
+    public class AttendanceParam
+    {
+        public string ClassName { get; set; }
+
+        public string Name { get; set; }
+
+        public DateTime? AttendanceDate { get; set; }
+
     }
 }
