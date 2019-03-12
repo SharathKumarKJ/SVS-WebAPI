@@ -142,38 +142,54 @@ namespace WebAppAngular5.Controllers
             ParseStudent(studentAttendanceInfo, studentAarrayIds);
 
             var existingStudentAttendance = _repository
-                .StudentAttendances.Where(x => x.IsActive && x.AttendanceDate == systemDate && x.IsPresent).ToList();
+                .StudentAttendances.Where(x => x.IsActive 
+                && x.AttendanceDate == systemDate
+                && x.Student.ClassDetailId == studentAttendanceInfo.ClassId).ToList();
 
+          
             if (existingStudentAttendance.Any())
             {
                 var absentStudents = existingStudentAttendance
-                    .Where(x => !studentAarrayIds.Contains(x.StudentId));
+                   .Where(x => x.IsPresent && !studentAarrayIds.Contains(x.StudentId)).ToList();
 
-                await UpdateAbsentStudents(createdBy, absentStudents);
+                if (absentStudents.Any())
+                {
+                    await UpdateAttendanceStatus(createdBy, absentStudents, false);
+                }
+
+                var presentStudents = existingStudentAttendance.Where(x=>studentAarrayIds.Contains(x.StudentId)).Except(absentStudents);
+                if (presentStudents.Any())
+                {
+                    await UpdateAttendanceStatus(createdBy, presentStudents, true);
+                }
+
+                return StatusCode(HttpStatusCode.NoContent);
             }
 
             var students = _repository.Students.Where(x => x.ClassDetailId == studentAttendanceInfo.ClassId
-            && x.IsActive).ToList();
+       && x.IsActive).ToList();
 
             var studentsArePresent = students.Where(x => studentAarrayIds.Contains(x.Id));
 
             var studentsAreAbsent = students.Except(studentsArePresent);
 
-            if (existingStudentAttendance.Any())
-            {
-                var existingIds = existingStudentAttendance.Select(y => y.StudentId);
-                students = students.Where(x => !existingIds.Contains(x.Id)).ToList();
-            }
-
             var studentAttendances = new List<StudentAttendance>();
 
-            InsertStudentAttendance(systemDate, createdBy, studentsArePresent, studentAttendances, isPresent: true);
+            if (studentsArePresent.Any())
+            {
+                InsertStudentAttendance(systemDate, createdBy, studentsArePresent, studentAttendances, isPresent: true);
+            }
+            if (studentsAreAbsent.Any())
+            {
+                InsertStudentAttendance(systemDate, createdBy, studentsAreAbsent, studentAttendances, isPresent: false);
+            }
 
-            InsertStudentAttendance(systemDate, createdBy, studentsAreAbsent, studentAttendances, isPresent: false);
+            if (studentAttendances.Any())
+            {
+                _repository.StudentAttendances.AddRange(studentAttendances);
 
-            _repository.StudentAttendances.AddRange(studentAttendances);
-
-            await _repository.SaveChangesAsync();
+                await _repository.SaveChangesAsync();
+            }
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -243,15 +259,15 @@ namespace WebAppAngular5.Controllers
                 studentAttendances.Add(entity);
             }
         }
-        private async Task UpdateAbsentStudents(User createdBy, IEnumerable<StudentAttendance> toBeAbsent)
+        private async Task UpdateAttendanceStatus(User createdBy, IEnumerable<StudentAttendance> students, bool IsPresent)
         {
-            if (toBeAbsent.Any())
+            if (students.Any())
             {
-                foreach (var student in toBeAbsent)
+                foreach (var student in students)
                 {
 
                     student.IsActive = true;
-                    student.IsPresent = false;
+                    student.IsPresent = IsPresent;
                     student.Updated = DateTime.UtcNow;
                     student.UpdatedBy = createdBy;
                     _repository.Entry(student).State = EntityState.Modified;

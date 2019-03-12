@@ -231,6 +231,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="AuthorizeAttribute.cs" />
     <Compile Include="Base\IRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -289,6 +290,18 @@
     <Compile Include="Migrations\201901241325170_StudentAttendance3.cs" />
     <Compile Include="Migrations\201901241325170_StudentAttendance3.Designer.cs">
       <DependentUpon>201901241325170_StudentAttendance3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903051129379_roles.cs" />
+    <Compile Include="Migrations\201903051129379_roles.Designer.cs">
+      <DependentUpon>201903051129379_roles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903070651453_userrole.cs" />
+    <Compile Include="Migrations\201903070651453_userrole.Designer.cs">
+      <DependentUpon>201903070651453_userrole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903070834513_userroledelete.cs" />
+    <Compile Include="Migrations\201903070834513_userroledelete.Designer.cs">
+      <DependentUpon>201903070834513_userroledelete.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModel.cs" />
@@ -446,6 +459,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901241325170_StudentAttendance3.resx">
       <DependentUpon>201901241325170_StudentAttendance3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903051129379_roles.resx">
+      <DependentUpon>201903051129379_roles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903070651453_userrole.resx">
+      <DependentUpon>201903070651453_userrole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903070834513_userroledelete.resx">
+      <DependentUpon>201903070834513_userroledelete.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

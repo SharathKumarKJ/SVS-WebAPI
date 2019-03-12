@@ -19,6 +19,7 @@ namespace WebAppAngular5.Controllers
         // GET: api/Students
         public IQueryable<Student> GetStudents()
         {
+           
             return _repository.Students.Include("ClassDetail").Where(x=>x.IsActive);
          
         }

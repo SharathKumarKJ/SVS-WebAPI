@@ -40,8 +40,7 @@ namespace WebAppAngular5.Models
                 .ToTable("UserClaims");
             modelBuilder.Entity<IdentityUserLogin>()
                 .ToTable("UserLogins");
-        }
+        }  
 
-    
     }
 }
