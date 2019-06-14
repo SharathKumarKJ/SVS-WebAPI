@@ -239,6 +239,7 @@
     <Compile Include="Controllers\FeeDetailsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentAttendancesController.cs" />
+    <Compile Include="Controllers\StudentMarksSheetsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\SubjectsController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
@@ -303,6 +304,10 @@
     <Compile Include="Migrations\201903070834513_userroledelete.Designer.cs">
       <DependentUpon>201903070834513_userroledelete.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904240836573_studentMarks.cs" />
+    <Compile Include="Migrations\201904240836573_studentMarks.Designer.cs">
+      <DependentUpon>201904240836573_studentMarks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\BaseEntity.cs" />
@@ -311,6 +316,7 @@
     <Compile Include="Models\Repository.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\StudentAttendance.cs" />
+    <Compile Include="Models\StudentMarksSheet.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Models\TeacherSubjectDetail.cs" />
@@ -468,6 +474,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903070834513_userroledelete.resx">
       <DependentUpon>201903070834513_userroledelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904240836573_studentMarks.resx">
+      <DependentUpon>201904240836573_studentMarks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

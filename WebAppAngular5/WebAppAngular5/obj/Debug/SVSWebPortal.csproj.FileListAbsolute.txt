@@ -147,3 +147,4 @@ C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debu
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.Migrations.roles.resources
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.Migrations.userrole.resources
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.Migrations.userroledelete.resources
+C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\WebAppAngular5\obj\Debug\WebAppAngular5.Migrations.studentMarks.resources

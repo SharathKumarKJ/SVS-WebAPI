@@ -312,7 +312,7 @@ namespace WebAppAngular5.Controllers
         public string Name { get; set; }
 
         public DateTime? AttendanceDate { get; set; }
-
+    
     }
     #endregion
 }
