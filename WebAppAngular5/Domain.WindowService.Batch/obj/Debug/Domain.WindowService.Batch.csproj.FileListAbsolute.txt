@@ -41,7 +41,6 @@ C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowService.Ba
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowService.Batch\bin\Debug\Quartz.pdb
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowService.Batch\bin\Debug\Quartz.xml
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowService.Batch\bin\Debug\System.Net.Http.Formatting.xml
-C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowService.Batch\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowService.Batch\bin\Debug\Newtonsoft.Json.xml
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowService.Batch\bin\Debug\System.Web.Http.WebHost.xml
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowService.Batch\bin\Debug\Microsoft.Owin.Cors.xml

@@ -41,7 +41,6 @@ C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowsService\b
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowsService\bin\Debug\Quartz.pdb
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowsService\bin\Debug\Quartz.xml
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowsService\bin\Debug\System.Net.Http.Formatting.xml
-C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowsService\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowsService\bin\Debug\Newtonsoft.Json.xml
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowsService\bin\Debug\System.Web.Http.WebHost.xml
 C:\Users\1024228\Mywork\GitHub\SVS-WebAPI\WebAppAngular5\Domain.WindowsService\bin\Debug\Microsoft.Owin.Cors.xml
