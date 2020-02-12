@@ -20,7 +20,7 @@ namespace WebAppAngular5.Controllers
         // GET: api/Subjects
         public IQueryable<Subject> GetSubjects()
         {
-            return _repository.Subjects.Where(x=>x.IsActive);
+            return _repository.Subjects.Where(x=>x.IsActive).Include("User");
         }
 
         // GET: api/Subjects/5
