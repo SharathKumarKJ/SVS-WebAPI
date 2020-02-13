@@ -655,10 +655,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/05/2020 11:08:09</publishTime>
     </File>
     <File Include="bin/WebAppAngular5.dll">
-      <publishTime>02/10/2020 16:11:05</publishTime>
+      <publishTime>02/13/2020 15:06:00</publishTime>
     </File>
     <File Include="bin/WebAppAngular5.pdb">
-      <publishTime>02/10/2020 16:11:05</publishTime>
+      <publishTime>02/13/2020 15:06:00</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>01/23/2014 13:57:34</publishTime>
@@ -862,7 +862,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/30/2018 17:19:50</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/10/2020 16:11:06</publishTime>
+      <publishTime>02/13/2020 15:06:00</publishTime>
     </File>
   </ItemGroup>
 </Project>
