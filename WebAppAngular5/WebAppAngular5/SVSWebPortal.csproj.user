@@ -18,7 +18,7 @@
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_IsAsyncSelected>True</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_DbContextTypeFullName>WebAppAngular5.Models.Repository</WebStackScaffolding_DbContextTypeFullName>
-    <NameOfLastUsedPublishProfile>SVSProfile</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>SVSAPIAzure</NameOfLastUsedPublishProfile>
     <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
   <ProjectExtensions>

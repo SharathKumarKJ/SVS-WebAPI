@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="SVSWebPortal" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\1024228\\Mywork\\GitHub\\SVS-WebAPI\\WebAppAngular5\\WebAppAngular5\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\1024228\\Mywork\\GitHub\\SVS-WebAPI\\WebAppAngular5\\WebAppAngular5\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=IN2-1024228LT\SQL2017;Initial Catalog=UserDB;User Id=sa;Password=password-1;MultipleActiveResultSets=true" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\1024228\\Mywork\\GitHub\\SVS-WebAPI\\WebAppAngular5\\WebAppAngular5\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>
