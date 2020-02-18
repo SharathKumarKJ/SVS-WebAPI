@@ -1,0 +1,22 @@
+name: Build Web App
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Checkout Code
+    - name : Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+    - name : Restore NuGet Packages
+      run: nuget restore SVSWebPortal.sln
+    - name : Build and Publish Web App
+      run: msbuild SVSWebPortal.sln /p:Configuration=Release /p:DeployOnBuild=true
+    - name: Upload Artifact
+      with: 
+        name: published_webapp
+        path: bin\Release\Publish
