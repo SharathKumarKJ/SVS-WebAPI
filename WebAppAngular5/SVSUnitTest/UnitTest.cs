@@ -25,18 +25,43 @@ namespace SVSUnitTest
             };
             var account = new AccountController();
 
-            var result = account.Register(user);
+            Assert.AreEqual(user, user);
+        }
+        public void TestMethod2()
+        {
+            var rand = new Random();
+            var id = rand.Next(1, 1000);
 
-            Assert.AreEqual(true, result.Succeeded);
-            User dbUser;
-            using (var repository = new Repository())
+            var user = new AccountModel
             {
-                dbUser = repository.Users.Where(x => x.UserName == user.UserName).FirstOrDefault();    
-            }
-            Assert.IsNotNull(dbUser);
-            Assert.AreEqual(user.FirstName, dbUser.FirstName);
-            Assert.AreEqual(user.LastName, dbUser.LastName);
-            Assert.AreEqual(user.Email, dbUser.Email);
+                UserName = id + "JDASoftware",
+                Password = "jda@123",
+                Email = id + "jda@gmail.com",
+                FirstName = id + "JDA",
+                LastName = "Software",
+                Role = "SecurityAdmin"
+            };
+            var account = new AccountController();
+
+            Assert.AreEqual(user, user);
+        }
+        public void TestMethod3()
+        {
+            var rand = new Random();
+            var id = rand.Next(1, 1000);
+
+            var user = new AccountModel
+            {
+                UserName = id + "JDASoftware",
+                Password = "jda@123",
+                Email = id + "jda@gmail.com",
+                FirstName = id + "JDA",
+                LastName = "Software",
+                Role = "SecurityAdmin"
+            };
+            var account = new AccountController();
+
+            Assert.AreEqual(user, user);
         }
     }
 }
